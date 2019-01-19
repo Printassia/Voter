@@ -31,11 +31,11 @@ public class VoterCat_Rum_San extends Application{
     }
 
     @Override public void start(Stage stage) throws Exception{
-        selectionLabel.setFont(Font.font("Geeza Pro",  15));
+        selectionLabel.setFont(Font.font("Geeza Pro",  12));
         selectionLabel.setTextFill(Color.WHITE);
 
         Label instruction = new Label("SELECT THE CANDIDATE YOU WISH TO VOTE FOR:");
-        instruction.setFont(Font.font("Geeza Pro",15));
+        instruction.setFont(Font.font("Geeza Pro",12));
         instruction.setTextFill(Color.WHITE);
         instruction.setPadding(new Insets(0,0,0,50));
         // DNA IMAGE
