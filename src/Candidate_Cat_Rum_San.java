@@ -1,14 +1,30 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Candidate_Cat_Rum_San {
     //include time and date
 
+    public static void main(String[] args) {
+        Candidate_Cat_Rum_San crs = new Candidate_Cat_Rum_San();
+        crs.Canditates();
+    }
+
+
+    //Create method to hold Canditates name and data
     public void Canditates() {
+
+
+
+        //Write program
         System.out.println("***KEMTECH Software Engineering***\n" +
                 "\nThe 2022 Bahamas National General Election" +
                 "\nChoose the NUMBER for the canditate you would like to vote for.\n\n" +
                 "1 - DNA: SAMUEL STRACHAN\n2 - FNM: GADVILLE McDONALD\n3 - PLP: PHILIP BRAVE DAVIS");
-
 
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
@@ -35,10 +51,9 @@ public class Candidate_Cat_Rum_San {
         else {
             System.err.println("Please choose a number between 1 and 3 to vote for your DNA, FNM or PLP canditate");
         }
+
+
     }
 
-    public static void main(String[] args) {
-        Candidate_Cat_Rum_San crs = new Candidate_Cat_Rum_San();
-        crs.Canditates();
-    }
+
 }
