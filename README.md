@@ -1,7 +1,7 @@
 # Voter
 Written in Java
 
-The program is made for each individual constituency.  It allows Voters to vote for their canditate. The results are populated into MySql database.
+The program is made for each individual constituency.  It allows Voters to vote for their canditate. The results are populated into MySql database based on Voters Name, Political Party and Constituency.
 # A Bahamian themed Voter Software Application 
 ![screen shot 2019-01-30 at 3 49 01 am](https://user-images.githubusercontent.com/29080731/51969927-a1f35b80-2443-11e9-86f9-7a21686e67b7.png)
 
