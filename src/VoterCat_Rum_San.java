@@ -1,3 +1,4 @@
+import com.sun.tools.javadoc.Start;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -18,24 +19,44 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.io.FileInputStream;
+import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class VoterCat_Rum_San extends Application{
 
     Label selectionLabel = new Label("BALLOT: ");
 
 
+
     Button FNMbutton, DNAbutton, PLPbutton;
+
+
 
     public static void main(String[] args) {
         launch(args);
+
     }
 
+
     @Override public void start(Stage stage) throws Exception{
-        selectionLabel.setFont(Font.font("Geeza Pro",  12));
+
+//        createConnection();
+
+        try{
+            //Connect to Database
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/Voter","root","");
+
+
+            System.out.println("Connected to Database");
+
+        selectionLabel.setFont(Font.font("Geeza Pro",  15));
         selectionLabel.setTextFill(Color.WHITE);
 
         Label instruction = new Label("SELECT THE CANDIDATE YOU WISH TO VOTE FOR:");
-        instruction.setFont(Font.font("Geeza Pro",12));
+        instruction.setFont(Font.font("Geeza Pro",15));
         instruction.setTextFill(Color.WHITE);
         instruction.setPadding(new Insets(0,0,0,50));
         // DNA IMAGE
@@ -45,12 +66,21 @@ public class VoterCat_Rum_San extends Application{
 
         DNAbutton = new Button("SAMUEL STRACHAN");
         DNAbutton.setPrefWidth(200);
-        DNAbutton.setStyle("-fx-background-color:green;");
+        DNAbutton.setStyle("-fx-background-color:green;"+
+                "-fx-font-size: 11.5pt;");
         DNAbutton.setPadding(new Insets(20,20,20,10));
         DNAbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                printMessage("YOU VOTED FOR: SAMUEL STRACHAN");
+               try{
+                   printMessage("YOU VOTED FOR: SAMUEL STRACHAN");
+                   Statement query = connect.createStatement();
+                   query.executeUpdate("INSERT INTO Vote_Count (Name, POL_PARTY, AREA) VALUES('Samuel Strachan', 'DNA'," +
+                           " 'Cat Island, Rum Cay, San Salvador') ");
+               }
+               catch (SQLException ex){
+
+               }
             }
         });
 
@@ -62,11 +92,20 @@ public class VoterCat_Rum_San extends Application{
         FNMbutton = new Button("GADVILLE McDONALD");
         FNMbutton.setPrefWidth(200);
         FNMbutton.setPadding(new Insets(20,20,20,10));
-        FNMbutton.setStyle("-fx-background-color:red;");
+        FNMbutton.setStyle("-fx-background-color:red;" +
+                "-fx-font-size: 11.5pt;");
         FNMbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                printMessage("YOU VOTED FOR: GADVILLE McDONALD");
+                try{
+                    printMessage("YOU VOTED FOR: GADVILLE McDONALD");
+                    Statement query = connect.createStatement();
+                    query.executeUpdate("INSERT INTO Vote_Count (Name, POL_PARTY, AREA) VALUES('Gadville Mcdonald', 'FNM'," +
+                            " 'Cat Island, Rum Cay, San Salvador') ");
+                }
+                catch (SQLException ex){
+
+                }
             }
         });
 
@@ -78,11 +117,21 @@ public class VoterCat_Rum_San extends Application{
         PLPbutton = new Button("PHILIP BRAVE DAVIS");
         PLPbutton.setPrefWidth(200);
         PLPbutton.setPadding(new Insets(20,20,20,10));
-        PLPbutton.setStyle("-fx-background-color:yellow;");
+        PLPbutton.setStyle("-fx-background-color:yellow;" +
+                "-fx-font-size: 11.5pt;"+
+                "-fx-color:white;");
         PLPbutton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                printMessage("YOU VOTED FOR:  PHILIP BRAVE DAVIS");
+               try{
+                   printMessage("YOU VOTED FOR:  PHILIP BRAVE DAVIS");
+                   Statement query = connect.createStatement();
+                   query.executeUpdate("INSERT INTO Vote_Count (Name, POL_PARTY, AREA) VALUES('Philip Brave Davis', 'PLP'," +
+                           " 'Cat Island, Rum Cay, San Salvador') ");
+               }
+               catch (SQLException ex){
+
+               }
             }
         });
 
@@ -127,12 +176,34 @@ public class VoterCat_Rum_San extends Application{
         //Display
         stage.show();
 
+        }
+
+        catch (ClassNotFoundException ex){
+            Logger.getLogger(VoterCat_Rum_San.class.getName()).log(Level.SEVERE,null,ex);
+            System.out.println("NO WAY");
+        }
+
+        catch(Exception ex){
+//
+            ex.printStackTrace();
+            System.out.println("NO WAY");
+        }
+
     }
 
     public void printMessage(String message){
         selectionLabel.setText(message);
     }
 
+
+    public void createConnection(){
+
+        //Create a Database connection
+
+
+
+
+    }
 
 
 
